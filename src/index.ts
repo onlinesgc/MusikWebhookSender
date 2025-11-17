@@ -1,5 +1,7 @@
 import { WebhookClient } from 'discord.js';
 import dotenv from 'dotenv';
+import { setDefaultResultOrder } from 'dns';
+setDefaultResultOrder('ipv4first');
 dotenv.config();
 
 
