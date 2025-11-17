@@ -26,7 +26,7 @@ setInterval(async () => {
     const data = await res.json();
     for (const donator of data.donators){
         if(!sentTimestamps.includes(donator.timestamp)){
-            const message = `Tack så mycket till ${donator.name == "" ? "En hemlig hjälte" : donator.name} som har donerat ${donator.amount} kr till SGCs bössa i Musikhjälpen! Totalt har vi nu samlat ihop ${data.amount} kr!`;
+            const message = `Tack så mycket till ${donator.name == "" ? "En hemlig hjälte" : donator.name} som har donerat ${donator.hidden_amount ? "en gåva" : donator.amount} kr till SGCs bössa i Musikhjälpen! Totalt har vi nu samlat ihop ${data.amount} kr!`;
             await webhookClient.send({
                 content: message
             });
