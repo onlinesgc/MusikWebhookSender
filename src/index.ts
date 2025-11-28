@@ -22,7 +22,13 @@ if(!fs.existsSync("sentTimestamps.json")){
 }
 
 setInterval(async () => {
-    const res = await fetch("https://musikapi.lukasabbe.com/api/collection/" + bossa);
+    const res = await fetch("https://musikapi.lukasabbe.com/api/collection/" + bossa).catch(err => {
+        console.error("Failed to fetch donation data:", err);
+    });
+    if(!res || !res.ok) {
+        console.error("Failed to fetch donation data: ", res?.statusText);
+        return;
+    }
     const data = await res.json();
     for (const donator of data.donators){
         if(!sentTimestamps.includes(donator.timestamp)){
